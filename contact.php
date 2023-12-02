@@ -38,7 +38,7 @@
       /* margin-top: 30px; */
     }
   </style>
-  
+
 
 
 
@@ -159,52 +159,43 @@
       <div class="row g-5">
         <div class="col-lg-7 wow fadeIn" data-wow-delay="0.1s">
           <div class="wow fadeIn" data-wow-delay="0.3s">
-            <form method="POST" action="process_form.php">
-
-
+            <form id="contactForm" method="POST" action="process_form.php">
               <div class="row g-3">
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="name" name="your_name" placeholder="Your Name" />
+                    <input type="text" class="form-control" id="name" name="your_name" placeholder="Your Name" required />
                     <label for="your_name">Your Name</label>
+                    <small class="text-danger" id="nameWarning" style="display: none;">Please enter your name</small>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <input type="email" class="form-control" id="email" name="your_email" placeholder="Your Email" />
+                    <input type="email" class="form-control" id="email" name="your_email" placeholder="Your Email" required />
                     <label for="your_email">Your Email</label>
+                    <small class="text-danger" id="emailWarning" style="display: none;">Please enter a valid email</small>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="subject" name="your_subject" placeholder="Subject" />
+                    <input type="text" class="form-control" id="subject" name="your_subject" placeholder="Subject" required />
                     <label for="your_subject">Subject</label>
+                    <small class="text-danger" id="emailWarning" style="display: none;">Please enter a subject</small>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="message" name="your_message" placeholder="Message" />
+                    <textarea class="form-control" id="message" name="your_message" placeholder="Message" required></textarea>
                     <label for="your_message">Message</label>
+                    <small class="text-danger" id="messageWarning" style="display: none;">Please enter your message</small>
                   </div>
                 </div>
                 <div class="col-12">
-                  <button class="btn btn-primary w-100 py-3" type="submit">
-                    Send Message
-                  </button>
+                  <button class="btn btn-primary w-100 py-3" type="submit" onclick="validateForm()">Send Message</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
         <div class="col-lg-5 wow fadeIn" data-wow-delay="0.5s">
           <iframe class="w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10898.893647592298!2d73.94929261044966!3d17.83412126748903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc246bb1e10337b%3A0xd765012f48815f8!2sUdtare%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1697309895332!5m2!1sen!2sin" frameborder="0" style="min-height: 300px; border: 0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
         </div>
@@ -213,40 +204,6 @@
   </div>
   <!-- Contact End -->
 
-  <!-- Newsletter Start -->
-  <!-- <div class="container-fluid newsletter bg-primary py-5 my-5">
-      <div class="container py-5">
-        <div
-          class="mx-auto text-center wow fadeIn"
-          data-wow-delay="0.1s"
-          style="max-width: 600px">
-          <h1 class="text-white mb-3">
-            <span class="fw-light text-dark">Let's Subscribe</span> The
-            Newsletter
-          </h1>
-          <p class="text-white mb-4">
-            Subscribe now to get 30% discount on any of our products
-          </p>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-md-7 wow fadeIn" data-wow-delay="0.5s">
-            <div class="position-relative w-100 mt-3 mb-2">
-              <input
-                class="form-control w-100 py-4 ps-4 pe-5"
-                type="text"
-                placeholder="Enter Your Email"
-                style="height: 48px" />
-              <button
-                type="button"
-                class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2">
-                <i class="fa fa-paper-plane text-white fs-4"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-  <!-- Newsletter End -->
   <br /><br /><br /><br /><br />
   <!-- Footer Start -->
   <div class="container-fluid bg-white footer">
@@ -254,7 +211,6 @@
       <div class="row g-5">
         <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
           <a href="index.php" class="d-inline-block mb-3">
-            <!-- <h1 class="text-primary">Hairnic</h1> -->
             <img src="./img/logo.png" alt="Logo" id="logo" />
           </a>
           <p class="mb-0">
@@ -296,9 +252,6 @@
           <h5 class="mb-4">Popular Link</h5>
           <a class="btn btn-link" href="/about.php">About Us</a>
           <a class="btn btn-link" href="./contact.php">Contact Us</a>
-          <!-- <a class="btn btn-link" href="">Privacy Policy</a>
-                <a class="btn btn-link" href="">Terms & Condition</a>
-                <a class="btn btn-link" href="">Career</a> -->
         </div>
       </div>
     </div>
@@ -309,18 +262,9 @@
             &copy; <a class="border-bottom" href="#">Worldwide Agro Store</a>,
             All Right Reserved.
 
-            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
             <br />Designed By
             <a class="border-bottom" target="_blank" href="https://www.linkedin.com/in/parth-bujawadekar/">Parth Bujawadekar,CodeGen Technologies,Satara</a>
           </div>
-          <!-- <div class="col-md-6 text-center text-md-end">
-                  <div class="footer-menu">
-                    <a href="">Home</a>
-                    <a href="">Cookies</a>
-                    <a href="">Help</a>
-                    <a href="">FAQs</a>
-                  </div>
-                </div> -->
         </div>
       </div>
     </div>
@@ -340,6 +284,43 @@
 
   <!-- Template Javascript -->
   <script src="js/main.js"></script>
+  <script>
+    function validateForm() {
+      var name = document.getElementById("name").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var message = document.getElementById("message").value.trim();
+
+      if (name === "") {
+        document.getElementById("nameWarning").style.display = "block";
+        return false;
+      } else {
+        document.getElementById("nameWarning").style.display = "none";
+      }
+
+      if (email === "" || !validateEmail(email)) {
+        document.getElementById("emailWarning").style.display = "block";
+        return false;
+      } else {
+        document.getElementById("emailWarning").style.display = "none";
+      }
+
+      if (message === "") {
+        document.getElementById("messageWarning").style.display = "block";
+        return false;
+      } else {
+        document.getElementById("messageWarning").style.display = "none";
+      }
+
+      return true; // Form will submit if all validations pass
+    }
+
+    // Email validation function
+    function validateEmail(email) {
+      // Regular expression for email validation
+      var re = /\S+@\S+\.\S+/;
+      return re.test(email);
+    }
+  </script>
 </body>
 
 </html>

@@ -101,7 +101,22 @@ session_start();
         }
         ?>
         <h2>My Orders</h2>
-        <table class="table table-bordered">
+        <!-- Date Picker Inputs -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="start_date">Start Date:</label>
+                <input type="date" class="form-control" id="start_date" name="start_date">
+            </div>
+            <div class="col-md-4">
+                <label for="end_date">End Date:</label>
+                <input type="date" class="form-control" id="end_date" name="end_date">
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary mt-4" onclick="filterOrders()">Filter</button>
+            </div>
+        </div>
+
+        <table id="order_table" class="table table-bordered">
             <thead>
                 <tr>
                     <th>Sr.No.</th>
@@ -154,6 +169,27 @@ session_start();
     <script src="lib/waypoints/waypoints.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+    function filterOrders() {
+        var startDate = new Date($('#start_date').val());
+        var endDate = new Date($('#end_date').val());
+
+        // Loop through each row in the table
+        $('#order_table tbody tr').each(function() {
+            var orderDateStr = $(this).find('td:eq(1)').text(); // Assuming date is in the second column
+            var orderDate = new Date(orderDateStr);
+
+            // Check if the date is valid and within the selected range
+            if (!isNaN(orderDate.getTime()) && orderDate >= startDate && orderDate <= endDate) {
+                $(this).show(); // Show rows within the selected date range
+            } else {
+                $(this).hide(); // Hide rows outside the selected date range
+            }
+        });
+    }
+</script>
+
+
 </body>
 
 </html>
