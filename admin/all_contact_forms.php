@@ -30,6 +30,20 @@ session_start();
         * {
             background-image: url('../img/bg.png');
         }
+
+        table#myTable tbody tr td {
+            color: black;
+        }
+
+        .row.mb-3 {
+            margin-bottom: 20px;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
@@ -120,7 +134,21 @@ session_start();
                                 <div class="card-header">
                                     <h4 class="m-b-0 text-white">All Contact Forms</h4>
                                 </div>
-
+                                <br>
+                                <!-- Date Picker Inputs -->
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="start_date">Start Date:</label>
+                                        <input type="date" class="form-control" id="start_date" name="start_date">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="end_date">End Date:</label>
+                                        <input type="date" class="form-control" id="end_date" name="end_date">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary mt-4" onclick="filterForms()">Filter</button>
+                                    </div>
+                                </div>
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped table-hover">
                                         <thead class="thead-dark">
@@ -129,6 +157,7 @@ session_start();
                                                 <th>Email</th>
                                                 <th>Subject</th>
                                                 <th>Message</th>
+                                                <th>Contact Date</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -150,6 +179,7 @@ session_start();
 																								<td>' . $rows['your_email'] . '</td>
 																								<td>' . $rows['your_subject'] . '</td>
 																								<td>' . $rows['your_message'] . '</td>
+																								<td>' . $rows['contact_date'] . '</td>
 																	
 																									 <td><a href="delete_form.php?form_del=' . $rows['your_email'] . '" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
 																									</td></tr>';
@@ -169,12 +199,35 @@ session_start();
     </div>
 
     </div>
-    <!-- <footer class="footer"> © 2022 - Online Food Ordering System</footer> -->
 
     </div>
 
     </div>
+    <script>
+        function filterForms() {
+            var startDateStr = $('#start_date').val();
+            var endDateStr = $('#end_date').val();
 
+            if (startDateStr === '' || endDateStr === '') {
+                alert('Please select both start date and end date.');
+                return;
+            }
+
+            var startDate = new Date(startDateStr);
+            var endDate = new Date(endDateStr);
+
+            $('#myTable tbody tr').each(function() {
+                var dateStr = $(this).find('td:eq(6)').text(); // Assuming the date is in the 7th column, adjust the index based on your table structure
+                var formDate = new Date(dateStr);
+
+                if (!isNaN(formDate.getTime()) && formDate >= startDate && formDate <= endDate) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    </script>
     <script src="js/lib/jquery/jquery.min.js"></script>>
     <script src="js/lib/bootstrap/js/popper.min.js"></script>
     <script src="js/lib/bootstrap/js/bootstrap.min.js"></script>

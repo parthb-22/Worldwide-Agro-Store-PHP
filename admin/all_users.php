@@ -30,6 +30,10 @@ session_start();
         * {
             background-image: url('../img/bg.png');
         }
+
+        table#myTable tbody tr td {
+            color: black;
+        }
     </style>
 </head>
 
@@ -128,9 +132,23 @@ session_start();
                                 <div class="card-header">
                                     <h4 class="m-b-0 text-white">All Users</h4>
                                 </div>
-
+                                <br>
+                                <!-- Date Picker Inputs -->
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="start_date">Start Date:</label>
+                                        <input type="date" class="form-control" id="start_date" name="start_date">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="end_date">End Date:</label>
+                                        <input type="date" class="form-control" id="end_date" name="end_date">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary mt-4" onclick="filterUsers()">Filter</button>
+                                    </div>
+                                </div>
                                 <div class="table-responsive m-t-40">
-                                    <table id="myTable" class="table table-bordered table-striped table-hover">
+                                    <table id="user_table" class="table table-bordered table-striped table-hover">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Username</th>
@@ -178,14 +196,36 @@ session_start();
             </div>
         </div>
     </div>
-
     </div>
-    <!-- <footer class="footer"> © 2022 - Online Food Ordering System</footer> -->
+    <script>
+        function filterUsers() {
+            var startDateStr = $('#start_date').val();
+            var endDateStr = $('#end_date').val();
 
-    </div>
+            if (startDateStr === '' || endDateStr === '') {
+                // Handling the case where either start date or end date is empty
+                alert('Please select both start date and end date.');
+                return;
+            }
 
-    </div>
+            var startDate = new Date(startDateStr);
+            var endDate = new Date(endDateStr);
 
+            // Loop through each row in the table
+            $('#user_table tbody tr').each(function() {
+                // Assuming the date is in the seventh column (index 6), modify this based on your table structure
+                var registrationDateStr = $(this).find('td:eq(6)').text();
+                var registrationDate = new Date(registrationDateStr);
+
+                // Check if the date is valid and within the selected range
+                if (!isNaN(registrationDate.getTime()) && registrationDate >= startDate && registrationDate <= endDate) {
+                    $(this).show(); // Show rows within the selected date range
+                } else {
+                    $(this).hide(); // Hide rows outside the selected date range
+                }
+            });
+        }
+    </script>
     <script src="js/lib/jquery/jquery.min.js"></script>>
     <script src="js/lib/bootstrap/js/popper.min.js"></script>
     <script src="js/lib/bootstrap/js/bootstrap.min.js"></script>
