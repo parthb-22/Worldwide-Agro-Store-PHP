@@ -35,7 +35,7 @@ if (empty($_SESSION["adm_id"])) {
 
     <body class="fix-header fix-sidebar">
         <!-- Your navbar and sidebar content here -->
-        
+
         <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -44,6 +44,19 @@ if (empty($_SESSION["adm_id"])) {
                             <div class="card card-outline-primary">
                                 <div class="card-header bg-primary text-white">
                                     <h4 class="m-b-0" style="text-align: center;">All Orders</h4>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label for="start_date">Start Date:</label>
+                                        <input type="date" class="form-control" id="start_date" name="start_date">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="end_date">End Date:</label>
+                                        <input type="date" class="form-control" id="end_date" name="end_date">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary mt-4" onclick="filterOrders()">Filter</button>
+                                    </div>
                                 </div>
                                 <div class="table-responsive m-t-40">
                                     <table id="myTable" class="table table-bordered table-striped">
@@ -126,6 +139,29 @@ if (empty($_SESSION["adm_id"])) {
             document.getElementById("redirectButton").onclick = function() {
                 window.location.href = "dashboard.php";
             };
+        </script>
+        <script>
+            function filterOrders() {
+                var startDateStr = document.getElementById('start_date').value;
+                var endDateStr = document.getElementById('end_date').value;
+
+                // Convert to date objects
+                var startDate = new Date(startDateStr);
+                var endDate = new Date(endDateStr);
+
+                // Loop through table rows
+                var tableRows = document.querySelectorAll('#myTable tbody tr');
+                for (var i = 0; i < tableRows.length; i++) {
+                    var rowDateStr = tableRows[i].querySelector('td:nth-child(8)').innerText; // Change this index according to your table structure
+                    var rowDate = new Date(rowDateStr);
+
+                    if (!isNaN(rowDate.getTime()) && rowDate >= startDate && rowDate <= endDate) {
+                        tableRows[i].style.display = '';
+                    } else {
+                        tableRows[i].style.display = 'none';
+                    }
+                }
+            }
         </script>
         <script src="js/lib/jquery/jquery.min.js"></script>
         <script src="js/lib/bootstrap/js/popper.min.js"></script>

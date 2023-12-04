@@ -31,7 +31,7 @@ session_start();
             background-image: url('../img/bg.png');
         }
 
-        table#myTable tbody tr td {
+        table#user_table tbody tr td {
             color: black;
         }
     </style>
