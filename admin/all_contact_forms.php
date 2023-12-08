@@ -217,7 +217,7 @@ session_start();
             var endDate = new Date(endDateStr);
 
             $('#myTable tbody tr').each(function() {
-                var dateStr = $(this).find('td:eq(6)').text(); // Assuming the date is in the 7th column, adjust the index based on your table structure
+                var dateStr = $(this).find('td:eq(4)').text(); // Adjust the index (4) based on your table structure
                 var formDate = new Date(dateStr);
 
                 if (!isNaN(formDate.getTime()) && formDate >= startDate && formDate <= endDate) {

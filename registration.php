@@ -24,7 +24,6 @@ if (isset($_POST['submit'])) {
 
 
       if ($_POST['password'] != $_POST['cpassword']) {
-
          echo "<script>alert('Password not match');</script>";
       } elseif (strlen($_POST['password']) < 6) {
          echo "<script>alert('Password Must be >=6');</script>";
@@ -91,8 +90,6 @@ if (isset($_POST['submit'])) {
                <div class="collapse navbar-toggleable-md  float-lg-right" id="mainNavbarCollapse">
                   <ul class="nav navbar-nav">
                      <li class="nav-item"> <a class="nav-link active" href="index.php">Home <span class="sr-only">(current)</span></a> </li>
-                     <li class="nav-item"> <a class="nav-link active" href="restaurants.php">Restaurants <span class="sr-only"></span></a> </li>
-
                      <?php
                      if (empty($_SESSION["user_id"])) {
                         echo '<li class="nav-item"><a href="login.php" class="nav-link active">Login</a> </li>
@@ -317,10 +314,5 @@ if (isset($_POST['submit'])) {
          });
       </script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-
-
 </body>
-
 </html>
